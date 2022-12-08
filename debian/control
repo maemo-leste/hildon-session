@@ -7,5 +7,5 @@ Standards-Version: 4.3.0
 
 Package: hildon-session
 Architecture: all
-Depends:
+Depends: debianutils
 Description: Session files for hildon
