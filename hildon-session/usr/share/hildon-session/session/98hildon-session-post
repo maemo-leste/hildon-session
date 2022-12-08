@@ -1,0 +1,4 @@
+#!/bin/sh
+
+/usr/share/hildon-session/hildon-session-post
+

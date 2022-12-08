@@ -1,0 +1,11 @@
+Source: hildon-session
+Section: misc
+Priority: optional
+Maintainer: Carl Klemm <carl@uvos.xyz>
+Build-Depends: debhelper (>= 10)
+Standards-Version: 4.3.0
+
+Package: hildon-session
+Architecture: all
+Depends:
+Description: Session files for hildon

@@ -1,0 +1,48 @@
+#!/bin/sh
+
+set -e
+
+PROGNAME=hildon-session-post
+
+message () {
+  # pretty-print messages of arbitrary length; use xmessage if it
+  # is available and $DISPLAY is set
+  MESSAGE="$PROGNAME: $*"
+  echo "$MESSAGE" | fold -s -w ${COLUMNS:-80} >&2
+  if [ -n "$DISPLAY" ] && which xmessage > /dev/null 2>&1; then
+    echo "$MESSAGE" | fold -s -w ${COLUMNS:-80} | xmessage -center -file -
+  fi
+}
+
+message_nonl () {
+  # pretty-print messages of arbitrary length (no trailing newline); use
+  # xmessage if it is available and $DISPLAY is set
+  MESSAGE="$PROGNAME: $*"
+  echo -n "$MESSAGE" | fold -s -w ${COLUMNS:-80} >&2;
+  if [ -n "$DISPLAY" ] && which xmessage > /dev/null 2>&1; then
+    echo -n "$MESSAGE" | fold -s -w ${COLUMNS:-80} | xmessage -center -file -
+  fi
+}
+
+errormsg () {
+  # exit script with error
+  message "$*"
+  exit 1
+}
+
+$SESSIONDIR=/usr/share/hildon-session/post
+
+# use run-parts to source every file in the session directory; we source
+# instead of executing so that the variables and functions defined above
+# are available to the scripts, and so that they can pass variables to each
+# other
+SESSIONFILES=$(run-parts --list $SESSIONDIR)
+if [ -n "$SESSIONFILES" ]; then
+  set +e
+  for SESSIONFILE in $SESSIONFILES; do
+    . $SESSIONFILE
+  done
+  set -e
+fi
+
+exit 0

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Hildon
+Comment=A x11 based ui for mobile devices
+Exec=hildon-session
+TryExec=hildon-session
+Type=Application
+X-LightDM-DesktopName=Hildon
+DesktopNames=Hildon
+Keywords=wm;windowmanager;window;manager;
