@@ -30,7 +30,7 @@ errormsg () {
   exit 1
 }
 
-$SESSIONDIR=/usr/share/hildon-session/post
+SESSIONDIR=/usr/share/hildon-session/post
 
 # use run-parts to source every file in the session directory; we source
 # instead of executing so that the variables and functions defined above
